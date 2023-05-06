@@ -11,6 +11,8 @@
   --cta-color: #4d5ae5;
   --customer-icon-color: #8e8f99;
   --footer-active-color: #31d0aa;
+  --modal-bg-color: #fcfcfc;
+  --modal-bg-btn: #e7e9fc;
 }
 .list {
   list-style: none;
@@ -99,6 +101,8 @@ body {
   padding-top: 24px;
   padding-bottom: 24px;
 
+  position: relative;
+
   font-weight: 500;
   font-size: 16px;
   line-height: 1.5;
@@ -110,6 +114,24 @@ body {
 .menu-link:focus {
   color: var(--active-color);
 }
+
+.menu-link.active {
+  color: var(--active-color);
+}
+
+.menu-link.active::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+
+  width: 100%;
+  height: 4px;
+  border-radius: 4px;
+  background-color: var(--active-color);
+}
+
 .contacts {
   display: flex;
 
@@ -199,26 +221,26 @@ body {
   border-radius: 4px;
 }
 
-.filter-btn {
-  font-family: "Roboto", sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.5;
-  letter-spacing: 0.04em;
-  color: var(--cta-color);
-  background-color: var(--light-bg-color);
-  cursor: pointer;
-  border: 1px solid #e7e9fc;
-  border-radius: 4px;
-  padding: 12px 24px;
-}
-
 .section {
   padding: 120px 0;
 }
 
 .about {
   padding-top: 0;
+}
+
+/* Advantages */
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  margin: -1px;
 }
 
 .advantages-list {
@@ -240,15 +262,6 @@ body {
   border-radius: 4px;
 }
 
-.filter-btn:hover,
-.filter-btn:focus {
-  color: var(--white-txt-color);
-  background-color: var(--active-color);
-  border: 1px solid transparent;
-  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.12),
-    0px 2px 1px 0px rgba(0, 0, 0, 0.08), 0px 3px 1px 0px rgba(0, 0, 0, 0.1);
-}
-
 .title {
   margin-bottom: 72px;
 
@@ -261,18 +274,6 @@ body {
   text-align: center;
 }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  border: 0;
-  padding: 0;
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  margin: -1px;
-}
-
 .subtitle {
   margin-bottom: 8px;
 
@@ -282,6 +283,8 @@ body {
   letter-spacing: 0.02em;
   color: var(--secondary-txt-color);
 }
+
+/* Team */
 
 .about-list,
 .team-list {
@@ -352,6 +355,8 @@ body {
   fill: var(--txt-color-dark-theme);
 }
 
+/* Customers */
+
 .customers-list {
   display: flex;
   gap: 24px;
@@ -391,11 +396,36 @@ body {
   border: 1px solid var(--active-color);
 }
 
+/* Portfolio */
+
 .btn-list {
   display: flex;
   gap: 24px;
   margin-bottom: 72px;
   justify-content: center;
+}
+
+.filter-btn {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: var(--cta-color);
+  background-color: var(--light-bg-color);
+  cursor: pointer;
+  border: 1px solid #e7e9fc;
+  border-radius: 4px;
+  padding: 12px 24px;
+}
+
+.filter-btn:hover,
+.filter-btn:focus {
+  color: var(--white-txt-color);
+  background-color: var(--active-color);
+  border: 1px solid transparent;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.12),
+    0px 2px 1px 0px rgba(0, 0, 0, 0.08), 0px 3px 1px 0px rgba(0, 0, 0, 0.1);
 }
 
 .portfolio-section {
@@ -426,6 +456,27 @@ body {
   border-top: none;
 }
 
+.portfolio-thumb {
+  position: relative;
+}
+
+/* Overlay */
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+  padding-top: 40px;
+  padding-left: 32px;
+
+  color: var(--txt-color-dark-theme);
+  background-color: var(--cta-color);
+}
+
+/* Footer */
 .footer {
   padding: 100px 0;
 }
@@ -497,4 +548,54 @@ body {
 
 .footer-social-icon {
   fill: var(--txt-color-dark-theme);
+}
+
+/* Modal window */
+
+.backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(46, 47, 66, 0.4);
+  backdrop-filter: 1px;
+}
+
+.modal {
+  position: absolute;
+  top: calc(50%-292px);
+  left: calc(50%-204px);
+
+  width: 408px;
+  height: 584px;
+
+  background-color: var(--modal-bg-color);
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.modal-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+
+  position: absolute;
+  top: 24px;
+  right: 24px;
+
+  width: 24px;
+  height: 24px;
+
+  background-color: var(--modal-bg-btn);
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.modal-close-icon {
+  fill: var(--secondary-txt-color);
 }
